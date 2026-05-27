@@ -1,36 +1,52 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# منفذ · Manfath
 
-## Getting Started
+**Your gateway from Yemen to Europe.** A bilingual (English + Arabic / RTL) platform
+that turns the maze of study- and work-abroad applications into one guided process for
+Yemeni graduates — register, build one profile, choose a European country, pay a flat
+fee, and track responses. The operator verifies payments and sends embassy/employer
+outreach from an admin console.
 
-First, run the development server:
+| | |
+|---|---|
+| **Student track** | $30 / application |
+| **Job-seeker track** | $80 / application |
+| **Payments** | Manual bank transfer, admin-verified |
+| **Outreach** | Auto-drafted email, admin-reviewed before sending |
+
+## Features
+
+- 🌍 Full **English + Arabic** with right-to-left mirroring and Arabic typography
+- 🎨 Institutional, embassy-grade design with Framer Motion throughout
+- 🧭 8-step **application wizard** with passport/photo uploads and autosave
+- 💳 **Payment flow** — bank details, receipt upload, manual verification
+- 📊 Applicant **dashboard** — status timeline, documents, embassy/job responses
+- 🛡️ **Admin console** — verify payments, generate & send outreach, post updates
+- 🔐 Firebase Auth + Firestore + Storage with locked-down security rules
+
+## Quick start
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev      # http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The site runs without configuration (marketing site fully usable). To enable
+accounts, data, uploads, payments, and admin — **see [`SETUP.md`](./SETUP.md)** for
+the full Firebase + Vercel walkthrough.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Stack
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Next.js 16 (App Router) · React 19 · TypeScript · Tailwind CSS v4 · Framer Motion ·
+Firebase · Resend.
 
-## Learn More
+## Project layout
 
-To learn more about Next.js, take a look at the following resources:
+```
+src/
+  app/            routes: / · /register · /login · /apply · /dashboard · /admin · /api/send-email
+  components/     site, landing, auth, apply, dashboard, admin, ui
+  lib/            firebase/ · i18n/ · data, config, email-template, utils
+firestore.rules   storage.rules
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+See [`SETUP.md`](./SETUP.md) to go live.
