@@ -2,11 +2,12 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ShieldCheck, Quote } from "lucide-react";
+import { ShieldCheck } from "lucide-react";
 import type { ReactNode } from "react";
 import { Logo } from "@/components/ui/Logo";
 import { LanguageToggle } from "@/components/ui/LanguageToggle";
 import { useI18n } from "@/lib/i18n/provider";
+import { YEMEN, DESTINATIONS } from "@/lib/data";
 
 export function AuthShell({
   title,
@@ -17,7 +18,7 @@ export function AuthShell({
   subtitle: string;
   children: ReactNode;
 }) {
-  const { t } = useI18n();
+  const { t, locale } = useI18n();
   return (
     <div className="grid min-h-screen lg:grid-cols-2">
       {/* form side */}
@@ -26,38 +27,44 @@ export function AuthShell({
           <Link href="/"><Logo /></Link>
           <LanguageToggle />
         </div>
-
         <div className="flex flex-1 items-center justify-center py-10">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 22 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
             className="w-full max-w-sm"
           >
-            <h1 className="font-display text-3xl font-semibold tracking-tight text-navy-950">{title}</h1>
-            <p className="mt-2 text-navy-600">{subtitle}</p>
+            <h1 className="font-display text-4xl font-extrabold tracking-tight text-ink">{title}</h1>
+            <p className="mt-2 text-ink-soft">{subtitle}</p>
             <div className="mt-8">{children}</div>
           </motion.div>
         </div>
       </div>
 
-      {/* brand side */}
-      <div className="relative hidden overflow-hidden bg-navy-950 text-paper lg:block">
-        <div className="pointer-events-none absolute inset-0 bg-grain opacity-50" />
-        <div className="pointer-events-none absolute -top-32 -end-24 size-[30rem] rounded-full bg-azure-500/15 blur-[120px]" />
-        <div className="pointer-events-none absolute -bottom-40 -start-20 size-[28rem] rounded-full bg-gold-500/10 blur-[120px]" />
+      {/* brand side — flame panel */}
+      <div className="relative hidden overflow-hidden border-s-2 border-ink bg-flame text-ink lg:block">
+        <span className="pointer-events-none absolute -end-10 -top-16 select-none font-display text-[16rem] font-extrabold leading-none text-ink/10">
+          {YEMEN.flag}
+        </span>
         <div className="relative flex h-full flex-col justify-between p-12">
-          <div className="rule-gold w-40 opacity-60" />
+          <div className="flex items-center gap-2 font-display text-sm font-bold uppercase tracking-[0.2em]">
+            {YEMEN.flag} {t.yemen.kicker}
+          </div>
           <div>
-            <Quote className="size-10 text-gold-400" />
-            <p className="mt-6 max-w-md font-display text-2xl leading-snug">
+            <p className="max-w-md font-display text-4xl font-extrabold leading-[1.02]">
               {t.brand.tagline}.
             </p>
-            <p className="mt-6 max-w-md text-navy-300">{t.cta.subtitle}</p>
+            <p className="mt-5 max-w-md text-ink/75">{t.cta.subtitle}</p>
+            <div className="mt-8 flex flex-wrap gap-2">
+              {DESTINATIONS.slice(0, 8).map((d) => (
+                <span key={d.code} className="rounded-full border-2 border-ink bg-flame px-3 py-1 text-sm font-semibold">
+                  {d.flag} {d[locale]}
+                </span>
+              ))}
+            </div>
           </div>
-          <div className="flex items-center gap-3 text-sm text-navy-200">
-            <ShieldCheck className="size-5 text-emerald-soft" />
-            {t.hero.trustline}
+          <div className="inline-flex items-center gap-2 text-sm font-semibold">
+            <ShieldCheck className="size-5" /> {t.hero.trustline}
           </div>
         </div>
       </div>

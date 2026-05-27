@@ -27,6 +27,23 @@ export const DESTINATIONS: Destination[] = [
   { code: "CZ", flag: "🇨🇿", en: "Czechia", ar: "التشيك", hub: { en: "Prague", ar: "براغ" } },
 ];
 
+/** Yemeni origin cities — used in the journey motif and identity copy. */
+export const YEMEN = {
+  flag: "🇾🇪",
+  en: "Yemen",
+  ar: "اليمن",
+  capital: { en: "Sana'a", ar: "صنعاء" },
+  cities: [
+    { en: "Sana'a", ar: "صنعاء" },
+    { en: "Aden", ar: "عدن" },
+    { en: "Taiz", ar: "تعز" },
+    { en: "Hodeidah", ar: "الحديدة" },
+    { en: "Ibb", ar: "إب" },
+    { en: "Mukalla", ar: "المكلا" },
+    { en: "Seiyun", ar: "سيئون" },
+  ],
+};
+
 export function destinationName(code: string, locale: Locale) {
   const d = DESTINATIONS.find((x) => x.code === code);
   return d ? d[locale] : code;

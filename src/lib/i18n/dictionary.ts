@@ -94,6 +94,16 @@ export const dictionary = {
       title: "Pathways across Europe",
       subtitle: "Choose your destination during your application.",
     },
+    yemen: {
+      kicker: "Rooted in Yemen",
+      title: "Built for Yemenis, by people who get it.",
+      body: "From Sana'a to Aden, Taiz to Mukalla — we help graduates across every governorate turn a hard-earned degree into a real future abroad. We speak your language, know the paperwork, and handle the parts where people get stuck.",
+      citiesLabel: "Serving graduates from",
+      stat: "Every governorate",
+      payTitle: "Pay locally, in Yemen.",
+      payBody: "A simple bank transfer inside Yemen — no cards, no foreign accounts. Send your receipt and we verify it by hand.",
+    },
+    journey: { from: "FROM", to: "TO", route: "Your route", origin: "Sana'a, Yemen" },
     trust: {
       kicker: "Why people trust Manfath",
       title: "Handled by a person, not a bot.",
@@ -416,6 +426,16 @@ export const dictionary = {
       title: "مسارات في أنحاء أوروبا",
       subtitle: "اختر وجهتك أثناء تقديم طلبك.",
     },
+    yemen: {
+      kicker: "من قلب اليمن",
+      title: "صُمّم لليمنيين، على أيدي من يفهمونكم.",
+      body: "من صنعاء إلى عدن، ومن تعز إلى المكلا — نساعد الخريجين في كل محافظة على تحويل شهاداتهم التي تعبوا من أجلها إلى مستقبل حقيقي في الخارج. نتحدّث لغتكم، ونعرف المعاملات، ونتولّى الأجزاء التي يتعثّر فيها الناس.",
+      citiesLabel: "نخدم الخريجين من",
+      stat: "كل المحافظات",
+      payTitle: "ادفع محليًا، داخل اليمن.",
+      payBody: "تحويل بنكي بسيط داخل اليمن — بلا بطاقات ولا حسابات أجنبية. أرسل الإيصال ونتحقق منه يدويًا.",
+    },
+    journey: { from: "من", to: "إلى", route: "مسارك", origin: "صنعاء، اليمن" },
     trust: {
       kicker: "لماذا يثق الناس بمنفذ",
       title: "يتولّاه إنسان، لا روبوت.",

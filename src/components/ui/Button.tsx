@@ -9,20 +9,21 @@ type Variant = "primary" | "gold" | "outline" | "ghost" | "paper";
 type Size = "sm" | "md" | "lg";
 
 const base =
-  "inline-flex items-center justify-center gap-2 font-medium rounded-full transition-colors duration-200 disabled:opacity-50 disabled:pointer-events-none select-none whitespace-nowrap";
+  "group inline-flex items-center justify-center gap-2 font-semibold rounded-full border-2 transition-all duration-200 disabled:opacity-40 disabled:pointer-events-none select-none whitespace-nowrap";
 
+// `gold` is the flame accent; names kept for backward compatibility.
 const variants: Record<Variant, string> = {
-  primary: "bg-navy-950 text-paper hover:bg-navy-900 shadow-[0_8px_24px_-12px_rgba(10,26,47,0.6)]",
-  gold: "bg-gold-500 text-navy-950 hover:bg-gold-400 shadow-[0_8px_24px_-12px_rgba(184,138,46,0.7)]",
-  outline: "border border-navy-200 text-navy-900 hover:border-navy-400 hover:bg-navy-50",
-  ghost: "text-navy-800 hover:bg-navy-50",
-  paper: "bg-paper text-navy-950 hover:bg-white shadow-card",
+  primary: "border-ink bg-ink text-canvas hover:-translate-y-0.5 hover:shadow-[5px_5px_0_0_var(--color-flame)]",
+  gold: "border-ink bg-flame text-ink hover:-translate-y-0.5 hover:shadow-[5px_5px_0_0_var(--color-ink)]",
+  outline: "border-ink bg-transparent text-ink hover:bg-ink hover:text-canvas",
+  ghost: "border-transparent text-ink hover:bg-sand",
+  paper: "border-ink bg-canvas text-ink hover:-translate-y-0.5 hover:shadow-[5px_5px_0_0_var(--color-ink)]",
 };
 
 const sizes: Record<Size, string> = {
-  sm: "h-9 px-4 text-sm",
-  md: "h-11 px-6 text-[15px]",
-  lg: "h-14 px-8 text-base",
+  sm: "h-9 px-4 text-[13px]",
+  md: "h-11 px-6 text-sm",
+  lg: "h-14 px-8 text-[15px]",
 };
 
 interface ButtonProps extends HTMLMotionProps<"button"> {
@@ -34,9 +35,8 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant = "primary", size = "md", ...props }, ref) => (
     <motion.button
       ref={ref}
-      whileHover={{ y: -1 }}
-      whileTap={{ scale: 0.98 }}
-      transition={{ type: "spring", stiffness: 400, damping: 25 }}
+      whileTap={{ scale: 0.97 }}
+      transition={{ type: "spring", stiffness: 500, damping: 30 }}
       className={cn(base, variants[variant], sizes[size], className)}
       {...props}
     />
@@ -60,9 +60,8 @@ export function ButtonLink({
   return (
     <Link href={href} className="inline-block">
       <motion.span
-        whileHover={{ y: -1 }}
-        whileTap={{ scale: 0.98 }}
-        transition={{ type: "spring", stiffness: 400, damping: 25 }}
+        whileTap={{ scale: 0.97 }}
+        transition={{ type: "spring", stiffness: 500, damping: 30 }}
         className={cn(base, variants[variant], sizes[size], className)}
       >
         {children}

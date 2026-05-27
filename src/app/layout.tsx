@@ -1,26 +1,35 @@
 import type { Metadata } from "next";
-import { Inter, Fraunces, IBM_Plex_Sans_Arabic } from "next/font/google";
+import { Bricolage_Grotesque, Instrument_Serif, Spline_Sans, Cairo } from "next/font/google";
 import "./globals.css";
 import { Providers } from "./providers";
 
-const inter = Inter({
-  variable: "--font-inter",
-  subsets: ["latin"],
-  display: "swap",
-});
-
-const fraunces = Fraunces({
+const display = Bricolage_Grotesque({
   variable: "--font-display",
   subsets: ["latin"],
   display: "swap",
-  weight: ["400", "500", "600", "700"],
+  weight: ["600", "700", "800"],
 });
 
-const plexArabic = IBM_Plex_Sans_Arabic({
+const serif = Instrument_Serif({
+  variable: "--font-serif",
+  subsets: ["latin"],
+  display: "swap",
+  weight: ["400"],
+  style: ["normal", "italic"],
+});
+
+const body = Spline_Sans({
+  variable: "--font-body",
+  subsets: ["latin"],
+  display: "swap",
+  weight: ["400", "500", "600"],
+});
+
+const cairo = Cairo({
   variable: "--font-arabic",
   subsets: ["arabic"],
   display: "swap",
-  weight: ["400", "500", "600", "700"],
+  weight: ["400", "500", "600", "700", "800"],
 });
 
 export const metadata: Metadata = {
@@ -36,10 +45,10 @@ export default function RootLayout({
     <html
       lang="en"
       dir="ltr"
-      className={`${inter.variable} ${fraunces.variable} ${plexArabic.variable} h-full antialiased`}
+      className={`${display.variable} ${serif.variable} ${body.variable} ${cairo.variable} h-full antialiased`}
       suppressHydrationWarning
     >
-      <body className="min-h-full flex flex-col bg-paper text-ink">
+      <body className="min-h-full flex flex-col">
         <Providers>{children}</Providers>
       </body>
     </html>

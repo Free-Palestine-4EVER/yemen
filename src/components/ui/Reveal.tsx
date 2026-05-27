@@ -4,11 +4,11 @@ import { motion, type Variants } from "framer-motion";
 import type { ReactNode } from "react";
 
 const variants: Variants = {
-  hidden: { opacity: 0, y: 24 },
+  hidden: { opacity: 0, y: 28 },
   show: (i: number = 0) => ({
     opacity: 1,
     y: 0,
-    transition: { duration: 0.6, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] },
+    transition: { duration: 0.7, delay: i * 0.08, ease: [0.16, 1, 0.3, 1] },
   }),
 };
 
@@ -38,11 +38,11 @@ export function Reveal({
   );
 }
 
-/** Small uppercase section eyebrow with a gold tick. */
+/** Editorial eyebrow: numbered/ticked uppercase label in flame. */
 export function Kicker({ children }: { children: ReactNode }) {
   return (
-    <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-gold-600">
-      <span className="h-px w-6 bg-gold-400" />
+    <span className="inline-flex items-center gap-2.5 text-xs font-bold uppercase tracking-[0.22em] text-flame">
+      <span className="inline-block size-2 rotate-45 bg-flame" />
       {children}
     </span>
   );
