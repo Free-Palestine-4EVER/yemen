@@ -37,16 +37,22 @@ export function subscribeApplication(
   uid: string,
   cb: (app: Application | null) => void,
 ) {
-  return onSnapshot(doc(db, COL, uid), (snap) => {
-    cb(snap.exists() ? (snap.data() as Application) : null);
-  });
+  return onSnapshot(
+    doc(db, COL, uid),
+    (snap) => cb(snap.exists() ? (snap.data() as Application) : null),
+    // Resolve to "no data" on error (e.g. Firestore not yet created / offline)
+    // so the UI stops loading instead of spinning forever.
+    () => cb(null),
+  );
 }
 
 export function subscribeAllApplications(cb: (apps: Application[]) => void) {
   const q = query(collection(db, COL), orderBy("updatedAt", "desc"));
-  return onSnapshot(q, (snap) => {
-    cb(snap.docs.map((d) => d.data() as Application));
-  });
+  return onSnapshot(
+    q,
+    (snap) => cb(snap.docs.map((d) => d.data() as Application)),
+    () => cb([]),
+  );
 }
 
 export async function listApplications(): Promise<Application[]> {

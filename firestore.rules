@@ -11,18 +11,22 @@ service cloud.firestore {
       return signedIn() && request.auth.uid == uid;
     }
 
-    // Reads the caller's role from their user profile.
+    // Admins are identified by their verified sign-in email.
+    // Keep this list in sync with ADMIN_EMAILS in src/lib/config.ts.
+    function adminEmails() {
+      return ['zzeidnaser@gmail.com', 'zz@gmail.com'];
+    }
     function isAdmin() {
-      return signedIn()
-        && exists(/databases/$(database)/documents/users/$(request.auth.uid))
-        && get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin';
+      return signedIn() && request.auth.token.email in adminEmails();
     }
 
     // User profiles
     match /users/{uid} {
       allow read: if isOwner(uid) || isAdmin();
-      // A user may create their own profile, but may NOT set themselves admin.
-      allow create: if isOwner(uid) && request.resource.data.role == 'user';
+      // A user may create their own profile; only admins (by email) may hold
+      // the 'admin' role — a normal user cannot self-promote.
+      allow create: if isOwner(uid)
+        && (request.resource.data.role == 'user' || isAdmin());
       allow update: if isAdmin()
         || (isOwner(uid) && request.resource.data.role == resource.data.role);
       allow delete: if isAdmin();
@@ -32,7 +36,6 @@ service cloud.firestore {
     match /applications/{uid} {
       allow read: if isOwner(uid) || isAdmin();
       allow create: if isOwner(uid) && request.resource.data.uid == uid;
-      // Owners can edit their own file; admins can edit anyone's.
       allow update: if isOwner(uid) || isAdmin();
       allow delete: if isAdmin();
     }

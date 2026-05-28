@@ -9,16 +9,16 @@ service firebase.storage {
     function isOwner(uid) {
       return signedIn() && request.auth.uid == uid;
     }
+    // Admins identified by verified sign-in email.
+    // Keep in sync with ADMIN_EMAILS in src/lib/config.ts.
     function isAdmin() {
       return signedIn()
-        && firestore.exists(/databases/(default)/documents/users/$(request.auth.uid))
-        && firestore.get(/databases/(default)/documents/users/$(request.auth.uid)).data.role == 'admin';
+        && request.auth.token.email in ['zzeidnaser@gmail.com', 'zz@gmail.com'];
     }
 
     // Applicant documents (passport, photo, payment proof)
     match /applications/{uid}/{allPaths=**} {
       allow read: if isOwner(uid) || isAdmin();
-      // Only images/PDFs up to 8 MB, written by the owner.
       allow write: if isOwner(uid)
         && request.resource.size < 8 * 1024 * 1024
         && (request.resource.contentType.matches('image/.*')

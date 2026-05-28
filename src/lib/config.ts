@@ -21,7 +21,7 @@ export const CONTACT = {
  * Emails that get admin access. Add your friend's account email here.
  * (Also enforced server-side via Firestore rules / custom claims for real security.)
  */
-export const ADMIN_EMAILS = ["zzeidnaser@gmail.com"];
+export const ADMIN_EMAILS = ["zzeidnaser@gmail.com", "zz@gmail.com"];
 
 export function isAdminEmail(email?: string | null) {
   if (!email) return false;
